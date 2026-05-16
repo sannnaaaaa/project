@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soil Crop Recommendation</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <div class="container">
+
+        <h1>Soil Crop Recommendation System</h1>
+
+        <form action="/predict" method="POST" enctype="multipart/form-data">
+
+            <input type="file" name="image" required>
+
+            <button type="submit">Analyze Soil</button>
+
+        </form>
+
+        {% if soil_type %}
+
+        <div class="result">
+
+            <h2>Detected Soil Type:</h2>
+            <p>{{ soil_type }}</p>
+
+            <h2>Recommended Crops:</h2>
+
+            <ul>
+                {% for crop in crops %}
+                    <li>{{ crop }}</li>
+                {% endfor %}
+            </ul>
+
+            <img src="{{ image_path }}" alt="Uploaded Soil Image">
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</body>
+</html>
